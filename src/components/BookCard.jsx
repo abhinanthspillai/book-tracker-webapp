@@ -5,7 +5,7 @@ import ProgressBar from './ProgressBar.jsx'
 import { STATUS_LABELS, STATUS_COLORS } from '../config/schema.js'
 import { getCoverUrl, getProgressPercentage } from '../utils/coverGradient.js'
 
-function BookCard({ book, onStatusChange, onDelete, onRate, view = 'grid' }) {
+function BookCard({ book, onStatusChange, onDelete, onEdit, onRate, view = 'grid' }) {
   const [showMenu, setShowMenu] = useState(false)
 
   const handleStatusChange = (e) => {
@@ -16,6 +16,11 @@ function BookCard({ book, onStatusChange, onDelete, onRate, view = 'grid' }) {
   const handleDelete = (e) => {
     e.stopPropagation()
     onDelete?.(book.id)
+  }
+
+  const handleEdit = (e) => {
+    e.stopPropagation()
+    onEdit?.(book)
   }
 
   const handleRate = (rating) => {
@@ -59,15 +64,26 @@ function BookCard({ book, onStatusChange, onDelete, onRate, view = 'grid' }) {
           </div>
           <div className="flex flex-col items-end gap-2">
             <StarRating rating={book.rating} onRate={handleRate} size="sm" readonly={!onRate} />
-            <button
-              onClick={handleDelete}
-              className="text-muted hover:text-danger transition-colors focus:outline-none focus:ring-2 focus:ring-danger rounded p-1"
-              aria-label="Delete book"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </button>
+            <div className="flex gap-1">
+              <button
+                onClick={handleEdit}
+                className="text-muted hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent rounded p-1"
+                aria-label="Edit book"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </button>
+              <button
+                onClick={handleDelete}
+                className="text-muted hover:text-danger transition-colors focus:outline-none focus:ring-2 focus:ring-danger rounded p-1"
+                aria-label="Delete book"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -85,7 +101,16 @@ function BookCard({ book, onStatusChange, onDelete, onRate, view = 'grid' }) {
             loading="lazy"
           />
         </Link>
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+          <button
+            onClick={handleEdit}
+            className="p-1.5 bg-white rounded-full shadow hover:bg-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+            aria-label="Edit book"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </button>
           <button
             onClick={handleDelete}
             className="p-1.5 bg-white rounded-full shadow hover:bg-danger hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-danger"

@@ -19,6 +19,7 @@ function Toast({ message, type = 'success', onClose, duration = 3000 }) {
       className={`fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg ${typeClasses[type]} z-50 animate-fade-in`}
       role="alert"
       aria-live="polite"
+      style={{ animation: 'fade-in 0.3s ease-out' }}
     >
       <div className="flex items-center gap-3">
         <span>{message}</span>

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import StarRating from './StarRating.jsx'
 import ProgressBar from './ProgressBar.jsx'
 import { STATUS_LABELS, STATUS_COLORS } from '../config/schema.js'
-import { getCoverUrl, getProgressPercentage } from '../utils/coverGradient.js'
+import { getCoverUrl } from '../utils/coverGradient.js'
+import { getProgressPercentage } from '../utils/stats.js'
 
 function BookCard({ book, onStatusChange, onDelete, onEdit, onRate, view = 'grid' }) {
   const [showMenu, setShowMenu] = useState(false)

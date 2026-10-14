@@ -11,7 +11,7 @@ import EmptyState from '../../components/EmptyState.jsx'
 import ConfirmDialog from '../../components/ConfirmDialog.jsx'
 import Toast from '../../components/Toast.jsx'
 import Button from '../../components/Button.jsx'
-import { BookOpen, Clock, Star, CheckCircle } from './icons.js'
+import { BookOpen, Clock, Star, CheckCircle } from './icons.jsx'
 
 function Library() {
   const navigate = useNavigate()
